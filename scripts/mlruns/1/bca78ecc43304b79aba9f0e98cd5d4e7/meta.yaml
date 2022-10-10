@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/1/bca78ecc43304b79aba9f0e98cd5d4e7/artifacts
+end_time: 1665363982425
+entry_point_name: ''
+experiment_id: '1'
+lifecycle_stage: active
+name: ''
+run_id: bca78ecc43304b79aba9f0e98cd5d4e7
+run_uuid: bca78ecc43304b79aba9f0e98cd5d4e7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1665363980916
+status: 3
+tags: []
+user_id: kraisfeld
