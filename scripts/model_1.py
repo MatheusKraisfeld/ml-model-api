@@ -1,27 +1,28 @@
+import logging
 import os
-import warnings
 import sys
-
-import pandas as pd
-import numpy as np
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import ElasticNet
-from sklearn import svm
+import warnings
 from urllib.parse import urlparse
+
 import mlflow
 import mlflow.sklearn
-
-import logging
+import numpy as np
+import pandas as pd
+from sklearn import svm
+from sklearn.linear_model import ElasticNet
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import train_test_split
 
 logging.basicConfig(level=logging.WARN)
 logger = logging.getLogger(__name__)
+
 
 def eval_metrics(actual, pred):
     rmse = np.sqrt(mean_squared_error(actual, pred))
     mae = mean_absolute_error(actual, pred)
     r2 = r2_score(actual, pred)
     return rmse, mae, r2
+
 
 if __name__ == "__main__":
     warnings.filterwarnings("ignore")
@@ -31,7 +32,8 @@ if __name__ == "__main__":
         data = pd.read_csv("~/ml-model-api/sources/pandas_df_success.csv")
     except Exception as e:
         logger.exception(
-            "Unable to download training & test CSV, check your internet connection. Error: %s", e
+            "Unable to download training & test CSV, check your internet connection. Error: %s",
+            e,
         )
 
     data = data.drop(["class"], axis=1)
@@ -46,7 +48,7 @@ if __name__ == "__main__":
         random = 48
 
         clf = svm.LinearSVC(C=0.5, max_iter=1000, verbose=0)
-        
+
         clf.fit(train_x, train_y)
 
         predicted_qualities = clf.predict(test_x)
@@ -65,6 +67,8 @@ if __name__ == "__main__":
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
         if tracking_url_type_store != "file":
-            mlflow.sklearn.log_model(clf, "model", registered_model_name="clf_iris_model_1")
+            mlflow.sklearn.log_model(
+                clf, "model", registered_model_name="clf_iris_model_1"
+            )
         else:
             mlflow.sklearn.log_model(clf, "model")

@@ -1,5 +1,7 @@
 import unittest
+
 from iris_model_api import validate_input
+
 
 class TestValidateInpu(unittest.TestCase):
     def test_validate_input(self):
@@ -8,5 +10,6 @@ class TestValidateInpu(unittest.TestCase):
         self.assertEqual(validate_input(0, 0, 0, 0), False)
         self.assertEqual(validate_input(1.1, 1.1, 1.1, 1.1), False)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

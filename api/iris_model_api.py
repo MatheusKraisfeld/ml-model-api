@@ -1,5 +1,6 @@
-from flask import Flask, request
 import pickle
+
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -9,17 +10,13 @@ def validate_input(sepal_length, sepal_width, petal_length, petal_width):
         sepal_length < 4.3 or sepal_length > 7.9
     ):
         return False
-    if not isinstance(sepal_width, float) or (
-        sepal_width < 2.0 or sepal_width > 4.4
-    ):
+    if not isinstance(sepal_width, float) or (sepal_width < 2.0 or sepal_width > 4.4):
         return False
     if not isinstance(petal_length, float) or (
         petal_length < 1.0 or petal_length > 6.9
     ):
         return False
-    if not isinstance(petal_width, float) or (
-        petal_width < 0.1 or petal_width > 2.5
-    ):
+    if not isinstance(petal_width, float) or (petal_width < 0.1 or petal_width > 2.5):
         return False
     return True
 

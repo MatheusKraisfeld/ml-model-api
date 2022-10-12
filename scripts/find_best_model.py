@@ -4,19 +4,19 @@ import pickle
 import mlflow.sklearn
 import pandas as pd
 
-df=mlflow.search_runs(
+df = mlflow.search_runs(
     experiment_ids="0",
     filter_string="",
     run_view_type=mlflow.entities.ViewType.ACTIVE_ONLY,
     max_results=1,
-    order_by=["metrics.rmse ASC"]
+    order_by=["metrics.rmse ASC"],
 )
 
-run_id = df.loc[df['metrics.rmse'].idxmin()]['run_id']
+run_id = df.loc[df["metrics.rmse"].idxmin()]["run_id"]
 
 model = mlflow.sklearn.load_model("runs:/" + run_id + "/model")
 
-with open('../api/best_model.pkl', 'wb') as f:
+with open("../api/best_model.pkl", "wb") as f:
     pickle.dump(model, f)
 
 data = pd.read_csv("~/ml-model-api/sources/pandas_df_success.csv")
