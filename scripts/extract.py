@@ -23,7 +23,7 @@ for error in errors:
 
 filtered_df = pd_df_iris.drop(pd_df_iris.index[[5, 15, 22, 25, 28]])
 
-filtered_df.to_csv('~/ml-model-api/sources/pandas_df_success.csv')
+filtered_df.to_csv('~/ml-model-api/sources/pandas_df_success.csv', index=False)
 
 fail_df = pd_df_iris.iloc[[5, 15, 22, 25, 28]]
 
@@ -34,4 +34,4 @@ for error in errors:
   fail_df.loc[error.row:error.row, 'messageError'] = str(error.column) + " " + str(error.message)
   i = i + 1
 
-fail_df.to_csv('~/ml-model-api/sources/pandas_df_fail.csv')
+fail_df.to_csv('~/ml-model-api/sources/pandas_df_fail.csv', index=False)

@@ -34,14 +34,15 @@ if __name__ == "__main__":
             "Unable to download training & test CSV, check your internet connection. Error: %s", e
         )
 
+    data = data.drop(["class"], axis=1)
     train, test = train_test_split(data)
 
-    train_x = train.drop(["class", "classEncoder"], axis=1)
-    test_x = test.drop(["class", "classEncoder"], axis=1)
+    train_x = train.drop(["classEncoder"], axis=1)
+    test_x = test.drop(["classEncoder"], axis=1)
     train_y = train[["classEncoder"]]
     test_y = test[["classEncoder"]]
 
-    with mlflow.start_run(experiment_id=1):
+    with mlflow.start_run(experiment_id=0):
         random = 48
 
         clf = svm.LinearSVC(C=0.5, max_iter=1000, verbose=0)

@@ -30,7 +30,7 @@ with DAG(
 			""".format(pathScript)
 		)
 
-	with TaskGroup("train_model", tooltip="train_model") as etl:
+	with TaskGroup("train_model", tooltip="train_model") as train_model:
 
 		t1 = BashOperator(
 				dag = dag,
@@ -63,4 +63,4 @@ with DAG(
 
 	end = DummyOperator(task_id="end")
 
-	start >> extract >> etl >> end
+	start >> extract >> train_model >> end
